@@ -10,3 +10,6 @@ To get your entry IDs:
 I like to put a comment with the date of the entry next to each entry ID so I know 
 what it is. This step is up to you; but if you have thousands of entries it could help
 you find things later. Maybe you'd like to put keywords here instead; up to you.
+
+## A more high tech solution...
+If you export all your Day One entries in .json format, you can pull out all the lines that have "uuid" in them, and then there are all your post uuids! I'll put a separate short script here that will make all the HTML links for you if you have a file that's just a big long list of uuid's.
