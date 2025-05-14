@@ -1,12 +1,16 @@
 #!/bin/bash
-# create_random_entry_webpage.bash
-# Create an HTML page that will take you to a random DayOne post.
-# 02/17/2019 spitman script created.
-# 02/17/2021 spitman made it more self contained. Renamed from make_links.bash.
+# random-maker.bash
+# This file should be one folder up from your .json files.
+# Prefix the backup folder name with "Export".
+# 02/17/2019 spitman script created
+# 02/17/2021 spitman made it more self contained
+# 06/05/2023 spitman added quotes around variables for spaced directories
+# 05/14/2025 spitman emptied out work files before adding to them
 
 # Setup Stuff
 thisDir=`pwd`
-mkdir ${thisDir}/work 2> /dev/null
+echo ${thisDir}
+mkdir -p "${thisDir}/work"
 rndPg="${thisDir}/random_entry.html"
 
 troubleshoot_me () {
@@ -14,36 +18,36 @@ troubleshoot_me () {
 }
 
 get_uuids () {
-  grep "\"uuid\" :" Export*/*.json | grep "," | cut -d"\"" -f4 > ${thisDir}/work/uuids.txt
+  echo -n " " > "${thisDir}/work/uuids.txt"
+  grep "\"uuid\" :" Export*/*.json | grep "," | cut -d"\"" -f4 > "${thisDir}/work/uuids.txt"
 }
 
 make_pushlines () {
-  echo > ${thisDir}/work/pushlines.txt
+  echo -n " " > "${thisDir}/work/pushlines.txt"
   while read line ; do
-    echo "i.push(\"${line}\");" >> ${thisDir}/work/pushlines.txt
-  done < ${thisDir}/work/uuids.txt
+    echo "i.push(\"${line}\");" >> "${thisDir}/work/pushlines.txt"
+  done < "${thisDir}/work/uuids.txt"
 }
 
 create_html_page () {
-  echo "<html>" > ${rndPg}
-  echo "<p><script type="text/javascript">" >> ${rndPg}
-  echo "var i = new Array();" >> ${rndPg}
+  echo "<html>" > "${rndPg}"
+  echo "<p><script type="text/javascript">" >> "${rndPg}"
+  echo "var i = new Array();" >> "${rndPg}"
   while read line2 ; do
-    echo "${line2}" >> ${rndPg}
-  done < ${thisDir}/work/pushlines.txt
-  echo "var item = i[Math.floor(Math.random()*i.length)];" >> ${rndPg}
-  echo "document.write(\"You have \" + i.length + \" entries... here we go to a <a href=dayone2://view?entryId=\" + item + \" style='text-decoration:none'>random</a> one... <meta http-equiv='refresh' content='3; url=dayone2://view?entryId=\" + item + \"'>\");" >> ${rndPg}
-  echo "</script>" >> ${rndPg}
-  echo "<p>Refresh this page to go to a different random entry.</p>" >> ${rndPg}
-  echo "</html>" >> ${rndPg}
-  echo "Complete. Open random_entry.html in your favorite browser."
+    echo "${line2}" >> "${rndPg}"
+  done < "${thisDir}/work/pushlines.txt"
+  echo "var item = i[Math.floor(Math.random()*i.length)];" >> "${rndPg}"
+  echo "document.write(\"You have \" + i.length + \" entries... here we go to a <a href=dayone2://view?entryId=\" + item + \" style='text-decoration:none'>random</a> one... <meta http-equiv='refresh' content='5; url=dayone2://view?entryId=\" + item + \"'>\");" >> "${rndPg}"
+  echo "</script>" >> "${rndPg}"
+  echo "<p>Refresh this page to go to a different random entry.</p>" >> "${rndPg}"
+  echo "</html>" >> "${rndPg}"
+  
 }
 
 ##########
 ## MAIN ##
 ##########
-# troubleshoot_me
-make_pushlines
+#troubleshoot_me
 get_uuids
 make_pushlines
 create_html_page
