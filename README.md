@@ -10,9 +10,9 @@ This is designed to be run on a Mac, in Terminal.
 3. You may get a popup about download media. Click on Proceed Anyway. You don't need media for this.
 4. Save the .zip file to the folder you made in step 1.
 5. Go to the folder, and expand the .zip file.
-6. Copy the create_random_entry_webpage.bash script from this github page directly into the folder you made in step 1. So in step 1's folder, you'll see the create_random_entry_webpage.bash script, the zip file, and a folder that starts with Export---. 
-7. Make sure the file you create is executable. (chmod 700 create_random_entry_webpage.bash)
-8. Run the script. (Just type ./create_random_entry_webpage.bash)
+6. Copy the random-maker.bash script from this github page directly into the folder you made in step 1. So in step 1's folder, you'll see the random-maker.bash script, the zip file, and a folder that starts with Export---. 
+7. Make sure the file you create is executable. (chmod 700 random-maker.bash)
+8. Run the script. (Just type ./random-maker.bash)
 9. In the step 1 folder you'll now see an html page called random_entry.html. The easiest way to open it, is go to the Finder app, open the step 1 folder, and double-click the html file.
 10. A web page will pop up. It will have a "random" link on it; or if you wait about three seconds, a DayOne page containing a random post should open automagically.
 
